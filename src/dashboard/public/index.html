@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helium — Minimalist Command Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient Subtle Accent Glow -->
+  <div class="ambient-glow"></div>
+
+  <div class="app-container">
+    <!-- Sleek Minimal Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-symbol">
+            <span class="pulsing-dot"></span>
+          </div>
+          <div class="brand-text">
+            <span class="brand-name">HELIUM</span>
+            <a href="https://github.com/scraperdevbd" target="_blank" rel="noopener" class="brand-author">req.akira aka ScraperDevBD</a>
+          </div>
+        </div>
+        <button class="icon-toggle" id="sidebarToggle" title="Collapse Sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </button>
+      </div>
+
+      <!-- Guild Selector -->
+      <div class="guild-selector-container">
+        <label class="selector-label">ACTIVE SERVER</label>
+        <select class="guild-dropdown" id="globalGuildSelect">
+          <option value="">Loading servers...</option>
+        </select>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-menu">
+        <div class="nav-section">COMMAND CENTER</div>
+        <button class="nav-button active" data-tab="overview">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9"/><rect x="14" y="3" width="7" height="5"/><rect x="14" y="12" width="7" height="9"/><rect x="3" y="16" width="7" height="5"/></svg>
+          <span>Overview</span>
+        </button>
+        <button class="nav-button" data-tab="server">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Server Setup</span>
+        </button>
+        <button class="nav-button" data-tab="security">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+          <span>Anti-Nuke Suite</span>
+          <span class="micro-badge">ACTIVE</span>
+        </button>
+        <button class="nav-button" data-tab="automod">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>AutoMod Filters</span>
+        </button>
+        <button class="nav-button" data-tab="moderation">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+          <span>Moderation Hub</span>
+        </button>
+        <button class="nav-button" data-tab="logs">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          <span>Audit Logs</span>
+        </button>
+        <button class="nav-button" data-tab="features">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <span>Features & Economy</span>
+        </button>
+        <button class="nav-button" data-tab="embeds">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span>Embed Studio</span>
+          <span class="micro-badge">LIVE</span>
+        </button>
+        <button class="nav-button" data-tab="database">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+          <span>Storage & Backups</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-pulse">
+          <span class="live-dot"></span>
+          <span>Online • PIN: 2026</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Workspace -->
+    <div class="workspace">
+      <!-- Minimalist Topbar -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <h2 class="view-heading" id="viewTitle">Overview</h2>
+        </div>
+        <div class="topbar-right">
+          <div class="stat-pill" id="pingPill">
+            <span class="dot-indicator"></span>
+            <span id="wsPing">-- ms</span>
+          </div>
+          <div class="stat-pill">
+            <span id="botUptime">--</span>
+          </div>
+          <div class="user-profile">
+            <span class="user-tag" id="userTag">@req.akira</span>
+            <button class="icon-button" id="btnLogout" title="Disconnect Session">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- View Sections -->
+      <main class="content-body">
+        <!-- 1. OVERVIEW VIEW -->
+        <section class="tab-pane active" id="pane-overview">
+          <div class="metric-row">
+            <div class="card stat-card">
+              <span class="stat-label">SERVERS</span>
+              <span class="stat-number" id="statGuildCount">--</span>
+              <span class="stat-sub">Active guilds</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">USERS</span>
+              <span class="stat-number" id="statUserCount">--</span>
+              <span class="stat-sub">Cached members</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">COMMANDS</span>
+              <span class="stat-number" id="statCmdCount">--</span>
+              <span class="stat-sub"><span id="statAliasCount">--</span> aliases active</span>
+            </div>
+            <div class="card stat-card">
+              <span class="stat-label">MEMORY</span>
+              <span class="stat-number" id="statMem">-- MB</span>
+              <span class="stat-sub">Heap allocation</span>
+            </div>
+          </div>
+
+          <div class="grid-2col">
+            <!-- Diagnostics -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">System Status & Environment</span>
+                <button class="btn btn-secondary btn-sm" id="btnRefreshStats">Refresh</button>
+              </div>
+              <div class="data-table-compact">
+                <div class="data-row">
+                  <span class="data-label">Architecture</span>
+                  <span class="data-val">Helium Core (Node 24 & TypeScript)</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Author & Creator</span>
+                  <span class="data-val text-red">@req.akira</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Database Engine</span>
+                  <span class="data-val" id="diagDb">SQLite3 (WAL Mode)</span>
+                </div>
+                <div class="data-row">
+                  <span class="data-label">Maintenance State</span>
+                  <span class="data-val" id="diagMaint">Operational (Normal)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Global Controls -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">System Operations</span>
+              </div>
+              <div class="button-list">
+                <button class="btn btn-outline w-full justify-between" id="btnToggleMaint">
+                  <span>Toggle Maintenance Mode</span>
+                  <span class="tag" id="tagMaintState">OFF</span>
+                </button>
+                <button class="btn btn-outline w-full justify-between" id="btnSyncCommands">
+                  <span>Sync Global Slash Commands</span>
+                  <span class="tag">REST API</span>
+                </button>
+                <button class="btn btn-outline w-full justify-between" id="btnReloadCommands">
+                  <span>Reload Internal Command Cache</span>
+                  <span class="tag">Cache</span>
+                </button>
+                <button class="btn btn-danger-ghost w-full justify-between" id="btnInstantBackupQuick">
+                  <span>Take Snapshot Backup Now</span>
+                  <span class="tag text-red">Snapshot</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2col mt-4">
+            <!-- Bot Server Identity Customization -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Server Bot Identity Customization</span>
+                <span class="tag">Instant 1-Click</span>
+              </div>
+              <p class="card-desc mb-3">Customized for this private server. Instantly change Helium's display name or nickname across the server without restarting.</p>
+              <div class="form-body">
+                <div class="form-item">
+                  <label>Display Name / Server Nickname</label>
+                  <div class="input-action-group">
+                    <input type="text" class="input-text" id="cfgBotName" placeholder="e.g. Helium Sentinel">
+                    <button class="btn btn-primary" id="btnUpdateBotName">Rename Bot</button>
+                  </div>
+                  <span class="field-hint">Updates the server nickname immediately and syncs global bot identity when permitted.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Authorized Developer Team & Maintenance Control -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Authorized Developer Team</span>
+                <span class="micro-badge" id="devCountBadge">0 DEVS</span>
+              </div>
+              <p class="card-desc mb-3">When Maintenance Mode is active, <strong>only</strong> authorized developers can execute commands. Non-developers are strictly blocked.</p>
+              <div class="dev-add-row mb-3">
+                <input type="text" class="input-text" id="newDevUserId" placeholder="Discord User ID or select member...">
+                <button type="button" class="btn btn-outline btn-sm" id="btnPickDevUser" title="Browse Server Members">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  Browse
+                </button>
+                <button class="btn btn-secondary" id="btnAddDeveloper">Authorize Dev</button>
+              </div>
+              <div class="table-wrap">
+                <table class="table-minimal" id="developersTable">
+                  <thead>
+                    <tr><th>User ID</th><th>Status</th><th>Action</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="3" class="text-muted text-center">Loading authorized developers...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. SERVER CONFIGURATION VIEW -->
+        <section class="tab-pane" id="pane-server">
+          <div class="grid-2col">
+            <!-- Server Core Settings -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Server Settings</span>
+                <button class="btn btn-primary btn-sm" id="btnSaveServerConfig">Save Changes</button>
+              </div>
+              <div class="form-body">
+                <div class="form-item">
+                  <label>Command Prefix</label>
+                  <input type="text" class="input-text" id="cfgPrefix" placeholder="&">
+                </div>
+                <div class="form-item">
+                  <label>Auto-Role on Join</label>
+                  <select class="input-select" id="cfgAutorole">
+                    <option value="">Disabled</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Verification Gate Role</label>
+                  <select class="input-select" id="cfgVerifyRole">
+                    <option value="">Disabled</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Verification Gate Channel</label>
+                  <select class="input-select" id="cfgVerifyChannel">
+                    <option value="">None</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Welcome & Goodbye Module -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Welcome & Goodbye Feeds</span>
+              </div>
+              <div class="form-body">
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Welcome Messages</span>
+                    <span class="switch-sub">Greet new server arrivals</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="cfgWelcomeEnabled">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="form-item">
+                  <label>Welcome Channel</label>
+                  <select class="input-select" id="cfgWelcomeChannel">
+                    <option value="">Select channel...</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Custom Welcome Text</label>
+                  <input type="text" class="input-text" id="cfgWelcomeMsg" placeholder="Welcome {user} to {server}!">
+                </div>
+
+                <hr class="divider">
+
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Goodbye Messages</span>
+                    <span class="switch-sub">Announce member departures</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="cfgGoodbyeEnabled">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="form-item">
+                  <label>Goodbye Channel</label>
+                  <select class="input-select" id="cfgGoodbyeChannel">
+                    <option value="">Select channel...</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Broadcast Announcement Tool -->
+          <div class="card mt-4">
+            <div class="card-head">
+              <span class="card-title">Live Server Announcement Broadcaster</span>
+            </div>
+            <div class="form-body">
+              <div class="grid-2col">
+                <div class="form-item">
+                  <label>Target Channel</label>
+                  <select class="input-select" id="broadcastChannel">
+                    <option value="">Select channel...</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Embed Title</label>
+                  <input type="text" class="input-text" id="broadcastTitle" placeholder="e.g. Server Announcement">
+                </div>
+              </div>
+              <div class="form-item mt-2">
+                <label>Announcement Message</label>
+                <textarea class="input-textarea" id="broadcastMessage" rows="3" placeholder="Enter message text..."></textarea>
+              </div>
+              <button class="btn btn-primary btn-sm mt-3 self-start" id="btnSendBroadcast">Send Announcement</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. ANTI-NUKE VIEW -->
+        <section class="tab-pane" id="pane-security">
+          <!-- Emergency Containment Strip -->
+          <div class="containment-strip">
+            <div class="containment-info">
+              <span class="containment-title">Emergency Containment Controls</span>
+              <span class="containment-desc">Instant guild lockdown and maximum alert enforcement</span>
+            </div>
+            <div class="containment-actions">
+              <button class="btn btn-danger" id="secBtnPanic">PANIC MODE</button>
+              <button class="btn btn-danger-ghost" id="secBtnLockdown">Lockdown Server</button>
+              <button class="btn btn-secondary" id="secBtnUnlock">Lift Lockdown</button>
+            </div>
+          </div>
+
+          <div class="grid-2col mt-4">
+            <!-- Anti-Nuke Settings Card -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Threat Mitigation Policy</span>
+                <button class="btn btn-primary btn-sm" id="btnSaveSecurityConfig">Save Policy</button>
+              </div>
+              <div class="form-body">
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Anti-Nuke Protection</span>
+                    <span class="switch-sub">Sliding-window containment for bans, kicks & deletions</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="cfgAntinukeEnabled">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="form-item">
+                  <label>Max Sensitive Actions in 10s Window</label>
+                  <input type="number" class="input-text" id="cfgAntinukeThreshold" min="1" max="10" value="3">
+                </div>
+
+                <div class="form-item">
+                  <label>Automated Punishment</label>
+                  <select class="input-select" id="cfgAntinukeAction">
+                    <option value="ban">Instant Ban & Strip Admin Roles</option>
+                    <option value="kick">Kick from Guild</option>
+                  </select>
+                </div>
+
+                <hr class="divider">
+
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Anti-Raid Join Defense</span>
+                    <span class="switch-sub">Rate-limiting for rapid account entries</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="cfgAntiraidEnabled">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+
+                <div class="form-item">
+                  <label>Max Joins / 10s Threshold</label>
+                  <input type="number" class="input-text" id="cfgAntiraidThreshold" min="2" max="25" value="5">
+                </div>
+              </div>
+            </div>
+
+            <!-- Whitelist Manager -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Trusted Whitelist</span>
+              </div>
+              <div class="add-entity-row">
+                <input type="text" class="input-text" id="whitelistInputId" placeholder="User or Role ID...">
+                <button type="button" class="btn btn-outline btn-sm" id="btnPickWhitelistUser" title="Browse Server Members">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  Browse
+                </button>
+                <select class="input-select w-auto" id="whitelistInputType">
+                  <option value="user">User</option>
+                  <option value="role">Role</option>
+                </select>
+                <button class="btn btn-secondary btn-sm" id="btnAddWhitelist">Add</button>
+              </div>
+
+              <div class="table-wrap mt-3">
+                <table class="table-minimal" id="whitelistTable">
+                  <thead>
+                    <tr><th>Entity ID</th><th>Type</th><th>Actions</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="3" class="text-muted text-center">No whitelisted entities.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Security Incidents Log -->
+          <div class="card mt-4">
+            <div class="card-head">
+              <span class="card-title">Live Security Log Feeds</span>
+            </div>
+            <div class="table-wrap">
+              <table class="table-minimal" id="securityEventsTable">
+                <thead>
+                  <tr><th>Event</th><th>Actor ID</th><th>Severity</th><th>Action Taken</th><th>Timestamp</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="5" class="text-muted text-center">No threats recorded. System secure.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. AUTOMOD VIEW -->
+        <section class="tab-pane" id="pane-automod">
+          <div class="grid-2col">
+            <!-- Filter Toggles -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">AutoMod Heuristics</span>
+                <button class="btn btn-primary btn-sm" id="btnSaveAutomod">Save Filters</button>
+              </div>
+              <div class="form-body">
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Master AutoMod Switch</span>
+                    <span class="switch-sub">Enable all active filters</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amMaster">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Anti-Invite Links</span>
+                    <span class="switch-sub">Deletes discord.gg / discord.com links</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amInvites">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Anti-Phishing & Links</span>
+                    <span class="switch-sub">Eliminates unauthorized URLs</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amLinks">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Anti-Spam Rapid Messages</span>
+                    <span class="switch-sub">Times out repeating chat spammers</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amSpam">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Excessive CAPS Filter</span>
+                    <span class="switch-sub">Filters screaming messages</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amCaps">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+                <div class="switch-row">
+                  <div>
+                    <span class="switch-label">Bad Words & Slurs Filter</span>
+                    <span class="switch-sub">Filters custom forbidden terms</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="amBadwords">
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Custom Word Filter List -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Blocked Words Dictionary</span>
+              </div>
+              <div class="add-entity-row">
+                <input type="text" class="input-text" id="inputNewBadword" placeholder="Add word...">
+                <button class="btn btn-secondary btn-sm" id="btnAddBadword">Add Word</button>
+              </div>
+              <div class="chip-container mt-3" id="badwordsChips">
+                <span class="text-muted">No custom words registered.</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. MODERATION VIEW -->
+        <section class="tab-pane" id="pane-moderation">
+          <div class="grid-2col">
+            <!-- Direct Punishment Launcher -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Direct Moderation Action</span>
+              </div>
+              <div class="form-body">
+                <div class="form-item">
+                  <label>Action Type</label>
+                  <select class="input-select" id="modActionType">
+                    <option value="warn">Warn Member</option>
+                    <option value="timeout">Timeout Member</option>
+                    <option value="kick">Kick from Guild</option>
+                    <option value="ban">Ban from Guild</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <div class="label-with-action">
+                    <label>Target Server Member</label>
+                    <button type="button" class="btn-text-action" id="btnPickModUser">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      Browse Members
+                    </button>
+                  </div>
+                  <div class="user-picker-target-wrap">
+                    <div class="selected-user-pill" id="modSelectedUserPill" style="display: none;">
+                      <img class="selected-user-avatar" id="modSelectedAvatar" src="" alt="">
+                      <div class="selected-user-meta">
+                        <span class="selected-user-name" id="modSelectedName">Username</span>
+                        <span class="selected-user-id" id="modSelectedId">123456789</span>
+                      </div>
+                      <button type="button" class="btn-pill-remove" id="btnRemoveModUser" title="Clear selection">×</button>
+                    </div>
+                    <div class="input-with-action-btn" id="modInputWrapper">
+                      <input type="text" class="input-text" id="modTargetUserId" placeholder="Paste ID or click 'Browse Members'...">
+                      <button type="button" class="btn btn-secondary btn-sm" id="btnBrowseModUser" title="Browse Server Members">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Browse
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item" id="modDurationGroup" style="display:none;">
+                  <label>Timeout Duration (Minutes)</label>
+                  <input type="number" class="input-text" id="modTimeoutMinutes" value="10" min="1" max="10080">
+                </div>
+                <div class="form-item">
+                  <label>Reason</label>
+                  <input type="text" class="input-text" id="modActionReason" placeholder="Reason for action...">
+                </div>
+                <button class="btn btn-danger btn-sm mt-2 self-start" id="btnExecutePunish">Execute Punishment</button>
+              </div>
+            </div>
+
+            <!-- Channel Slowmode Tool -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Channel Slowmode Adjuster</span>
+              </div>
+              <div class="form-body">
+                <div class="form-item">
+                  <label>Target Channel</label>
+                  <select class="input-select" id="slowmodeChannel">
+                    <option value="">Select channel...</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Slowmode Cooldown</label>
+                  <select class="input-select" id="slowmodeSeconds">
+                    <option value="0">Off (0s)</option>
+                    <option value="5">5 seconds</option>
+                    <option value="10">10 seconds</option>
+                    <option value="30">30 seconds</option>
+                    <option value="60">1 minute</option>
+                    <option value="300">5 minutes</option>
+                  </select>
+                </div>
+                <button class="btn btn-secondary btn-sm mt-2 self-start" id="btnSetSlowmode">Update Slowmode</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Moderation Cases Table -->
+          <div class="card mt-4">
+            <div class="card-head">
+              <span class="card-title">Recent Cases & Infractions</span>
+              <button class="btn btn-secondary btn-sm" id="btnRefreshModCases">Refresh</button>
+            </div>
+            <div class="table-wrap">
+              <table class="table-minimal" id="modCasesTable">
+                <thead>
+                  <tr><th>Case</th><th>User</th><th>Action</th><th>Moderator</th><th>Reason</th><th>Date</th><th>Revoke</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td colspan="7" class="text-muted text-center">No infractions recorded.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. AUDIT LOGS VIEW -->
+        <section class="tab-pane" id="pane-logs">
+          <div class="card">
+            <div class="card-head">
+              <span class="card-title">Audit Logging Channels Routing</span>
+              <button class="btn btn-primary btn-sm" id="btnSaveLogs">Save Routing</button>
+            </div>
+            <p class="card-desc">Configure dedicated Discord channels to receive granular real-time event logs.</p>
+            <div class="grid-2col mt-3">
+              <div class="form-item">
+                <label>Security & Anti-Nuke Logs</label>
+                <select class="input-select" id="logSecurity"><option value="">Default</option></select>
+              </div>
+              <div class="form-item">
+                <label>Moderation Punishments</label>
+                <select class="input-select" id="logMod"><option value="">Default</option></select>
+              </div>
+              <div class="form-item">
+                <label>Member Joins & Leaves</label>
+                <select class="input-select" id="logMember"><option value="">Default</option></select>
+              </div>
+              <div class="form-item">
+                <label>Message Edits & Deletions</label>
+                <select class="input-select" id="logMessage"><option value="">Default</option></select>
+              </div>
+              <div class="form-item">
+                <label>Voice Activity Events</label>
+                <select class="input-select" id="logVoice"><option value="">Default</option></select>
+              </div>
+              <div class="form-item">
+                <label>Server & Role Changes</label>
+                <select class="input-select" id="logServer"><option value="">Default</option></select>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. FEATURES & ECONOMY VIEW -->
+        <section class="tab-pane" id="pane-features">
+          <div class="grid-2col">
+            <!-- Economy Banker -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Economy Balance Manager</span>
+              </div>
+              <div class="form-body">
+                <div class="form-item">
+                  <div class="label-with-action">
+                    <label>Target Account User ID</label>
+                    <button type="button" class="btn-text-action" id="btnPickEcoUser">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                      Browse
+                    </button>
+                  </div>
+                  <div class="input-with-action-btn">
+                    <input type="text" class="input-text" id="ecoUserId" placeholder="User ID...">
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnBrowseEcoUser" title="Browse Server Members">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label>Operation</label>
+                  <select class="input-select" id="ecoType">
+                    <option value="add">Add Coins (+)</option>
+                    <option value="set">Set Exact Amount (=)</option>
+                    <option value="remove">Deduct Coins (-)</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Target Account</label>
+                  <select class="input-select" id="ecoTarget">
+                    <option value="wallet">Wallet Balance</option>
+                    <option value="bank">Bank Vault</option>
+                  </select>
+                </div>
+                <div class="form-item">
+                  <label>Coin Amount</label>
+                  <input type="number" class="input-text" id="ecoAmount" min="1" value="1000">
+                </div>
+                <button class="btn btn-primary btn-sm mt-2 self-start" id="btnAdjustEco">Update Balance</button>
+              </div>
+            </div>
+
+            <!-- Support Tickets Active -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Open Support Tickets</span>
+              </div>
+              <div class="table-wrap">
+                <table class="table-minimal" id="ticketsTable">
+                  <thead>
+                    <tr><th>Ticket #</th><th>User</th><th>Channel ID</th><th>Close</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="4" class="text-muted text-center">No open tickets.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 8. DATABASE & BACKUPS VIEW -->
+        <section class="tab-pane" id="pane-database">
+          <div class="grid-2col">
+            <!-- Backups Manager -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Saved Role Backups</span>
+                <button class="btn btn-danger btn-sm" id="btnCreateBackupTab">Create Snapshot</button>
+              </div>
+              <div class="table-wrap">
+                <table class="table-minimal" id="dbBackupsTable">
+                  <thead>
+                    <tr><th>Backup ID</th><th>Created</th><th>Restore</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="3" class="text-muted text-center">No backups recorded.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Table Record Manifest -->
+            <div class="card">
+              <div class="card-head">
+                <span class="card-title">Database Storage Tables</span>
+              </div>
+              <div class="table-wrap">
+                <table class="table-minimal" id="dbTablesTable">
+                  <thead>
+                    <tr><th>Table</th><th>Records</th><th>Status</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><td colspan="3" class="text-muted text-center">Loading tables...</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 9. EMBED STUDIO & LIVE PREVIEW -->
+        <section class="tab-pane" id="pane-embeds">
+          <div class="embed-studio-grid">
+            <!-- Embed Designer Form -->
+            <div class="card embed-editor-card">
+              <div class="card-head">
+                <div>
+                  <span class="card-title">Interactive Embed Studio</span>
+                  <p class="card-desc">Craft rich Discord embeds with live preview, custom emoji parsing, and 1-click dispatch to any channel.</p>
+                </div>
+                <div class="preset-pill-group">
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPresetAnnouncement">Announcement</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPresetRules">Rules</button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="btnPresetSecurity">Security</button>
+                </div>
+              </div>
+
+              <div class="form-body">
+                <div class="form-item">
+                  <label>Target Discord Channel <span class="text-red">*</span></label>
+                  <select class="input-select" id="embedTargetChannel">
+                    <option value="">Select target channel...</option>
+                  </select>
+                </div>
+
+                <div class="form-item">
+                  <label>Outside Message Text (Optional)</label>
+                  <input type="text" class="input-text" id="embedMessageContent" placeholder="e.g. @everyone or Announcement notice">
+                </div>
+
+                <div class="grid-2col-compact">
+                  <div class="form-item">
+                    <label>Author Name</label>
+                    <input type="text" class="input-text" id="embedAuthorName" placeholder="e.g. Helium Security">
+                  </div>
+                  <div class="form-item">
+                    <label>Author Icon URL</label>
+                    <input type="text" class="input-text" id="embedAuthorIcon" placeholder="https://...">
+                  </div>
+                </div>
+
+                <div class="form-item">
+                  <label>Embed Title</label>
+                  <input type="text" class="input-text" id="embedTitle" placeholder="e.g. Server Verification Required">
+                </div>
+
+                <div class="form-item">
+                  <div class="label-with-hint">
+                    <label>Description (Supports Discord Markdown & Emojis)</label>
+                    <span class="text-muted-xs">Supports custom <:name:id> or <a:name:id> emojis</span>
+                  </div>
+                  <textarea class="input-textarea" id="embedDescription" rows="5" placeholder="Enter embed message body. Supports **bold**, *italics*, code blocks, and custom emojis like <:shield:1375484552704688231>"></textarea>
+                </div>
+
+                <div class="form-item">
+                  <label>Accent Color</label>
+                  <div class="color-picker-row">
+                    <input type="color" id="embedColorPicker" value="#ED4245" class="input-color">
+                    <input type="text" class="input-text" id="embedColorHex" value="#ED4245" placeholder="#ED4245">
+                    <div class="color-swatches">
+                      <button type="button" class="swatch" style="background: #ED4245;" data-color="#ED4245" title="Red"></button>
+                      <button type="button" class="swatch" style="background: #5865F2;" data-color="#5865F2" title="Blurple"></button>
+                      <button type="button" class="swatch" style="background: #57F287;" data-color="#57F287" title="Green"></button>
+                      <button type="button" class="swatch" style="background: #FEE75C;" data-color="#FEE75C" title="Yellow"></button>
+                      <button type="button" class="swatch" style="background: #EB459E;" data-color="#EB459E" title="Fuchsia"></button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="grid-2col-compact">
+                  <div class="form-item">
+                    <label>Thumbnail Image URL</label>
+                    <input type="text" class="input-text" id="embedThumbnail" placeholder="https://... (small top-right icon)">
+                  </div>
+                  <div class="form-item">
+                    <label>Banner Image URL</label>
+                    <input type="text" class="input-text" id="embedImage" placeholder="https://... (large bottom banner)">
+                  </div>
+                </div>
+
+                <!-- Custom Fields List -->
+                <div class="form-item">
+                  <div class="label-with-action">
+                    <label>Custom Fields</label>
+                    <button type="button" class="btn btn-secondary btn-sm" id="btnAddEmbedField">+ Add Field</button>
+                  </div>
+                  <div class="fields-container" id="embedFieldsList"></div>
+                </div>
+
+                <div class="grid-2col-compact">
+                  <div class="form-item">
+                    <label>Footer Text</label>
+                    <input type="text" class="input-text" id="embedFooterText" placeholder="e.g. Helium Security • req.akira aka ScraperDevBD">
+                  </div>
+                  <div class="form-item">
+                    <label>Footer Icon URL</label>
+                    <input type="text" class="input-text" id="embedFooterIcon" placeholder="https://...">
+                  </div>
+                </div>
+
+                <div class="form-actions mt-3">
+                  <button type="button" class="btn btn-primary btn-lg w-full" id="btnDispatchEmbed">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    Send Embed to Channel
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Discord Live Realistic Preview -->
+            <div class="card embed-preview-card">
+              <div class="card-head">
+                <span class="card-title">Live Discord Client Preview</span>
+                <span class="preview-badge">LIVE WYSIWYG</span>
+              </div>
+              <div class="discord-chat-container">
+                <div class="discord-message">
+                  <div class="discord-avatar-col">
+                    <div class="discord-bot-avatar" id="prevBotAvatar">
+                      <span>H</span>
+                    </div>
+                  </div>
+                  <div class="discord-content-col">
+                    <div class="discord-header">
+                      <span class="discord-bot-name" id="prevBotName">Helium</span>
+                      <span class="discord-bot-badge">APP</span>
+                      <span class="discord-timestamp">Today at 12:00 PM</span>
+                    </div>
+
+                    <div class="discord-outside-text" id="prevOutsideContent"></div>
+
+                    <!-- Embed Box -->
+                    <div class="discord-embed-box" id="discordEmbedBox" style="border-left-color: #ED4245;">
+                      <div class="discord-embed-inner">
+                        <div class="discord-embed-left">
+                          <div class="discord-author-row" id="prevAuthorRow" style="display: none;">
+                            <img class="discord-author-icon" id="prevAuthorIcon" src="" alt="">
+                            <span class="discord-author-name" id="prevAuthorName"></span>
+                          </div>
+                          <div class="discord-title" id="prevTitle">Sample Embed Title</div>
+                          <div class="discord-description" id="prevDesc">Embed description text will appear here with live markdown and custom emoji rendering.</div>
+                          <div class="discord-fields-grid" id="prevFieldsGrid"></div>
+                          <div class="discord-image-container" id="prevImageContainer" style="display: none;">
+                            <img class="discord-main-image" id="prevImage" src="" alt="Embed Media">
+                          </div>
+                          <div class="discord-footer-row" id="prevFooterRow">
+                            <img class="discord-footer-icon" id="prevFooterIcon" src="" alt="" style="display: none;">
+                            <span class="discord-footer-text" id="prevFooterText">Helium • Today</span>
+                          </div>
+                        </div>
+                        <div class="discord-embed-right" id="prevThumbnailContainer" style="display: none;">
+                          <img class="discord-thumbnail" id="prevThumbnail" src="" alt="Thumbnail">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- App Footer with Author & Community Credit -->
+        <footer class="app-footer">
+          <div class="footer-left">
+            <span>Helium High-Performance Bot System</span>
+            <span class="footer-dot">•</span>
+            <span>Created by <strong>req.akira aka ScraperDevBD</strong></span>
+            <span class="footer-dot">•</span>
+            <span><a href="mailto:scraperdev.bd@gmail.com" class="footer-link">scraperdev.bd@gmail.com</a></span>
+          </div>
+          <div class="footer-right">
+            <a href="https://discord.gg/rQbFHJYnCK" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+              <span>Community Server</span>
+            </a>
+            <a href="https://github.com/scraperdevbd" target="_blank" rel="noopener noreferrer" class="footer-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <span>GitHub</span>
+            </a>
+          </div>
+        </footer>
+      </main>
+    </div>
+  </div>
+
+  <!-- Server Member Picker Popup Modal -->
+  <div class="modal-backdrop" id="userPickerModal">
+    <div class="modal-box modal-user-picker">
+      <div class="modal-head user-picker-head">
+        <div class="user-picker-head-left">
+          <div class="picker-icon-bubble">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div>
+            <h3 class="modal-title">Select Server Member</h3>
+            <p class="modal-desc" id="userPickerSubtitle">Choose any member from the server or search by name</p>
+          </div>
+        </div>
+        <button type="button" class="btn-modal-close" id="userPickerClose" title="Close (Esc)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Realtime Search and Filter Header -->
+      <div class="picker-search-bar">
+        <div class="picker-search-input-wrap">
+          <svg class="picker-search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="input-text picker-search-input" id="userPickerSearch" placeholder="Search by username, display name, or user ID..." autocomplete="off">
+          <button type="button" class="picker-search-clear" id="userPickerClearSearch" style="display: none;">×</button>
+        </div>
+        <div class="picker-counter-badge" id="userPickerCountBadge">0 members</div>
+      </div>
+
+      <!-- Member Grid Container -->
+      <div class="member-grid-container" id="userPickerGrid">
+        <div class="member-loading-state">
+          <div class="spinner-sm"></div>
+          <span>Loading server members...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Rack -->
+  <div class="toast-rack" id="toastContainer"></div>
+
+  <!-- Confirmation Sheet Modal -->
+  <div class="modal-backdrop" id="confirmModal">
+    <div class="modal-box">
+      <div class="modal-head">
+        <span class="modal-title" id="modalTitle">Confirm Action</span>
+      </div>
+      <p class="modal-text" id="modalDesc">Are you sure you want to proceed with this operation?</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="modalCancel">Cancel</button>
+        <button class="btn btn-danger" id="modalConfirm">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Minimalist Authentication Modal -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal-box">
+      <div class="brand text-center mb-3">
+        <div class="brand-symbol mx-auto mb-2">
+          <span class="pulsing-dot"></span>
+        </div>
+        <h3 class="modal-title">Helium Command Access</h3>
+        <p class="modal-desc">Authorize with your Discord User ID & Master PIN <code>2026</code>.</p>
+      </div>
+      <form id="loginForm">
+        <div class="form-item mb-3">
+          <label>Discord User ID</label>
+          <input type="text" class="input-text" id="loginUserId" placeholder="e.g. 1375484552704688231" required>
+        </div>
+        <div class="form-item mb-4">
+          <label>PIN Key</label>
+          <input type="password" class="input-text" id="loginKey" placeholder="2026" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-full">Unlock Dashboard</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

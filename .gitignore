@@ -1,0 +1,33 @@
+# Environment & Secret Credentials
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Compilation & Build outputs
+dist/
+
+# SQLite Database and local data
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/backups/
+*.sqlite
+*.sqlite3
+
+# Logs & Debug
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo

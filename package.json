@@ -1,0 +1,41 @@
+{
+  "name": "helium-bot",
+  "version": "1.0.0",
+  "description": "Helium - Production-Grade Red Themed Discord All-In-One Bot by req.akira aka ScraperDevBD",
+  "main": "dist/index.js",
+  "homepage": "https://discord.gg/rQbFHJYnCK",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scraperdevbd/helium-bot.git"
+  },
+  "scripts": {
+    "dev": "tsx src/index.ts",
+    "build": "tsc && node -e \"const fs = require('fs'); fs.cpSync('src/dashboard/public', 'dist/dashboard/public', { recursive: true });\"",
+    "start": "node dist/index.js",
+    "register": "tsx src/scripts/deployCommands.ts",
+    "test": "tsx tests/runTests.ts"
+  },
+  "keywords": [
+    "discord-bot",
+    "helium",
+    "moderation",
+    "anti-nuke",
+    "automod",
+    "security"
+  ],
+  "author": "req.akira aka ScraperDevBD <scraperdev.bd@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.8.1",
+    "discord.js": "^14.18.0",
+    "dotenv": "^16.4.7",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/express": "^5.0.6",
+    "@types/node": "^22.13.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}
